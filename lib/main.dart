@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttshop/models/product_model.dart';
 import 'package:fluttshop/screens/homepage.dart';
+import 'package:fluttshop/screens/product_detail.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -20,6 +21,9 @@ class MyApp extends StatelessWidget {
 
         theme: ThemeData.light(),
         home: HomePage(),
+        routes: {
+          ProductDetails.routeName:(context) =>ProductDetails()
+        },
       ),
     );
   }
