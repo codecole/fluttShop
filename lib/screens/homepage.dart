@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttshop/screens/cart.dart';
 import 'package:fluttshop/utilities/font.dart';
 import 'package:fluttshop/widgets/all_products.dart';
 import 'package:fluttshop/widgets/category.dart';
@@ -15,6 +16,21 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         title: Text('FluttShop'),
+        actions: [
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: IconButton(
+              icon: Icon(Icons.shopping_cart,color: Colors.white,),
+              onPressed: (){
+                Navigator.
+                pushNamed(context,CartScreen.routeName );
+
+              },
+
+            ),
+          )
+        ],
+
       ),
       body: Padding(
         padding:  EdgeInsets.all(24.0),

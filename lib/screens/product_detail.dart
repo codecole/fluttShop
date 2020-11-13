@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:fluttshop/models/product_model.dart';
 import 'package:provider/provider.dart';
+import 'package:fluttshop/models/cart.dart';
+import 'package:fluttshop/screens/cart.dart';
 
 class ProductDetails extends StatelessWidget {
   static const routeName = '/product_detail';
 
   @override
   Widget build(BuildContext context) {
+    final cart = Provider.of<Cart>(context);
+
     final productId = ModalRoute.of(context).settings.arguments as String;
     final loadedProduct = Provider.of<Products>(context).findById(productId);
     return Scaffold(
@@ -20,13 +24,13 @@ class ProductDetails extends StatelessWidget {
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
-
               children: [
                 Padding(
                   padding: EdgeInsets.all(32.0),
                   child: Container(
                       height: 200.0,
-                      child: Center(child: Image.network(loadedProduct.imgUrl))),
+                      child:
+                          Center(child: Image.network(loadedProduct.imgUrl))),
                 ),
                 Text(
                   'Price: \$${loadedProduct.price}',
@@ -39,23 +43,31 @@ class ProductDetails extends StatelessWidget {
                 SizedBox(
                   height: 32.0,
                 ),
-
               ],
             ),
             Positioned(
               bottom: 80.0,
               left: 60.0,
-
               child: FlatButton.icon(
                 padding: EdgeInsets.all(16.0),
                 color: Colors.black,
-                onPressed: () {},
-
-                label: Text('Add to Cart',style: TextStyle(color: Colors.white,fontSize: 32.0),),
-                icon: Icon(Icons.shopping_cart,color: Colors.white,size: 24.0,),),
+                onPressed: () {
+                  cart.addItem(
+                      productId, loadedProduct.name, loadedProduct.price);
+                  Navigator.pushNamed(context, CartScreen.routeName);
+                },
+                label: Text(
+                  'Add to Cart',
+                  style: TextStyle(color: Colors.white, fontSize: 32.0),
+                ),
+                icon: Icon(
+                  Icons.shopping_cart,
+                  color: Colors.white,
+                  size: 24.0,
+                ),
+              ),
             )
           ],
-
         ),
       ),
     );

@@ -11,20 +11,30 @@ class CartPrdts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+
       children: [
         ListTile(
+
           leading: CircleAvatar(
             backgroundColor: Colors.yellow,
-            child: Text(
-              '\$$price',
-              style: TextStyle(color: Colors.yellow),
+            radius: 32.0,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+
+                '\$$price',
+                style: TextStyle(color: Colors.black),
+              ),
             ),
           ),
-          title: Column(
-            children: [
-              Text(''),
-              Text('Total: \$$price*$quantity'),
-            ],
+          title: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Text(name,style: TextStyle(fontWeight: FontWeight.bold),),
+                Text('Total: \$${(price * quantity)}'),
+              ],
+            ),
           ),
           trailing: Text('$quantity x'),
         )

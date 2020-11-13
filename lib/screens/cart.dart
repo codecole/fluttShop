@@ -10,25 +10,40 @@ class CartScreen extends StatelessWidget {
     final cart = Provider.of<Cart>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cart'),
+        backgroundColor: Colors.black,
+        title: Text('Cart')
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      body: ListView(
         children: [
-          ListView.builder(
-            itemCount: cart.items.length,
-            itemBuilder: (ctx, i)=> CartPrdts(
-              id: cart.items.values.toList()[i].id,
-               price: cart.items.values.toList()[i].price,
-              quantity:  cart.items.values.toList()[i].quantity,
-                name:cart.items.values.toList()[i].name,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                height: 400.0,
+                child: Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: ListView.builder(
+                    itemCount: cart.items.length,
+                    itemBuilder: (ctx, i)=> CartPrdts(
+                      id: cart.items.values.toList()[i].id,
+                      price: cart.items.values.toList()[i].price,
+                      quantity:  cart.items.values.toList()[i].quantity,
+                      name:cart.items.values.toList()[i].name,
 
-            ),),
-          FlatButton(
-            onPressed: () {},
-            child: Text('Checkout'),
-          )
+                    ),),
+                ),
+              ),
+              FlatButton(
+                padding: EdgeInsets.all(8.0),
+                color: Colors.black,
+                onPressed: () {},
+                child: Text('Checkout',style: TextStyle(color: Colors.white,fontSize: 32.0),
+              ),)
+            ],
+          ),
         ],
+
       ),
     );
   }
