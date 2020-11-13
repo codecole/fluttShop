@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
-class CartItem {
+class CartProducts {
   final String id;
   final String name;
   final int quantity;
   final double price;
 
-  CartItem(
+  CartProducts(
       {@required this.id,
       @required this.name,
       @required this.price,
@@ -15,9 +15,9 @@ class CartItem {
 }
 
 class Cart with ChangeNotifier {
-  Map<String, CartItem> _items = {};
+  Map<String, CartProducts> _items = {};
 
-  Map<String, CartItem> get items {
+  Map<String, CartProducts> get items {
     return {..._items};
   }
   int get itemCount {
@@ -25,9 +25,9 @@ class Cart with ChangeNotifier {
   }
   void addItem(String product, String name, double price){
     if (_items.containsKey(product)){
-items.update(product, (existingCartItem) => CartItem(id:DateTime.now().toString() ,name:existingCartItem.name, quantity:existingCartItem.quantity+1 ,price:existingCartItem.price ) )
+items.update(product, (existingCartItem) => CartProducts(id:DateTime.now().toString() ,name:existingCartItem.name, quantity:existingCartItem.quantity+1 ,price:existingCartItem.price ) );
     }else{
-      _items.putIfAbsent((product), () => CartItem(
+      _items.putIfAbsent((product), () => CartProducts(
         id: DateTime.now().toString(),quantity: 1,price: price,name: name
       ));
     }
@@ -42,7 +42,7 @@ items.update(product, (existingCartItem) => CartItem(id:DateTime.now().toString(
     if(!_items.containsKey(id)){
       return;
     }if (_items[id].quantity >1){
-      _items.update(id,(existingCartItem)=>CartItem(
+      _items.update(id,(existingCartItem)=>CartProducts(
         id: DateTime.now().toString(), name: existingCartItem.name,price: existingCartItem.price,quantity: existingCartItem.quantity-1
       ));
     }
